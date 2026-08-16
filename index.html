@@ -98,23 +98,27 @@
         }
 /* Painel de notificações */
         .painel-notif {
-            display: none;              /* começa ESCONDIDO */
-            background: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-            width: 320px;
-            position: absolute;
-            top: 90px;                  /* abaixo do botão */
-            right: 20px;
-            z-index: 100;
+           display: none;
+           background: #ffffff;
+           border-left: 1px solid #ddd;
+           box-shadow: -4px 0 16px rgba(0,0,0,0.15);
+           width: 360px;
+           height: 100vh;              /* ocupa a altura toda da tela */
+           position: fixed;           /* fixo na tela, não rola com a página */
+           top: 0;
+           right: 0;
+           z-index: 100;
+           overflow-y: auto;           /* rolagem se tiver muitas notificações */
         }
         .painel-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 18px;
-            border-bottom: 1px solid #eee;
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           padding: 20px;
+           border-bottom: 1px solid #eee;
+           position: sticky;          /* cabeçalho gruda no topo ao rolar */
+           top: 0;
+           background: #ffffff;
         }
         .painel-header h3 {
             margin: 0;
@@ -182,9 +186,8 @@
 </div>
 
 <!-- Painel de notificações -->
-<div class="painel-notif" id="painel-notif">
-   <div class="painel-header">
-        <h3>Notificações</h3>
+<div class="painel-header">
+    <h3>Notificações</h3>
     <button class="btn-fechar" onclick="toggleNotificacoes()">✕</button>
 </div>
     
