@@ -41,6 +41,15 @@
             color: #888;
             font-size: 14px;
         }
+        cards-container {
+            display: flex;
+            gap: 20px;          /* espaço entre os cards */
+            margin-top: 20px;
+        }
+        card {
+            flex: 1;            /* cada card ocupa o mesmo espaço */
+    /* ... mantenha o resto do CSS do card como está ... */
+        }
     </style>
 </head>
 <body>
@@ -49,6 +58,7 @@
 
     <p>Esta página foi hospedada com <strong>GitHub Pages</strong> — um serviço de nuvem gratuito.</p>
 
+<div class="cards-container">
     <div class="card">
         <span class="badge">🔎︎</span>
         <h2>Consulta de EPIs</h2>
@@ -60,7 +70,9 @@
         <h2>Retirada de EPI</h2>
         <p>Entregar crachá, ler ficha e vincular EPIs ao funcionário.</p>
     </div>
+</div>
 
+<div class="cards-container">
     <div class="card">
         <span class="badge">←</span>
         <h2>Devolução de EPI</h2>
@@ -72,6 +84,7 @@
         <h2>Registrar Novo EPI</h2>
         <p>Cadastrar novos equipamentos e adicionar ao estoque.</p>
     </div>
+</div>
 
     <footer>
         <p>Feito com HTML e CSS — publicado em <strong>github.io</strong></p>
