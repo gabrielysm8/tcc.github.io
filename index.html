@@ -13,11 +13,13 @@
             background-color: #f5f7fa;
             color: #1a1a2e;
             line-height: 1.6;
+            position: relative;   /* ← NOVO: âncora para o painel */
         }
         h1 {
             color: #0f3460;
             border-bottom: 3px solid #e94560;
             padding-bottom: 10px;
+            margin: 0;              /* ← NOVO: remove margem padrão */
         }
         .card {
             background: #ffffff;
@@ -76,6 +78,7 @@
            display: flex;
            align-items: center;
            gap: 8px;
+           height: fit-content;    /* ← NOVO: não estica */
         }
         /* Badge vermelho sobreposto */
         .notif-badge {
@@ -93,6 +96,75 @@
            align-items: center;
            justify-content: center;
         }
+/* Painel de notificações */
+        .painel-notif {
+            display: none;              /* começa ESCONDIDO */
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            width: 320px;
+            position: absolute;
+            top: 90px;                  /* abaixo do botão */
+            right: 20px;
+            z-index: 100;
+        }
+        .painel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            border-bottom: 1px solid #eee;
+        }
+        .painel-header h3 {
+            margin: 0;
+            font-size: 15px;
+            color: #1a1a2e;
+        }
+        .btn-fechar {
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            color: #888;
+        }
+        .notif-lista {
+            padding: 8px 0;
+        }
+        .notif-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 18px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+        }
+        .notif-item:hover {
+            background: #f9f9f9;
+        }
+        .notif-item:last-child {
+            border-bottom: none;
+        }
+        .notif-icone {
+            font-size: 18px;
+        }
+        .notif-titulo {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1a1a2e;
+        }
+        .notif-desc {
+            margin: 2px 0 0 0;
+            font-size: 12px;
+            color: #888;
+        }
+        .notif-alerta {
+            background: #fff5f5;
+        }
+        .notif-alerta .notif-titulo {
+            color: #e94560;
+        }
     </style>
 </head>
 <body>
@@ -108,6 +180,40 @@
         <span class="notif-badge">3</span>
     </button>
 </div>
+
+<!-- Painel de notificações -->
+<div class="painel-notif" id="painel-notif">
+   <div class="painel-header">
+        <h3>Notificações</h3>
+    <button class="btn-fechar" onclick="toggleNotificacoes()">✕</button>
+</div>
+    
+<div class="notif-lista">
+    <div class="notif-item notif-alerta">
+        <span class="notif-icone">⚠️</span>
+    <div>
+        <p class="notif-titulo">CI próximo do vencimento</p>
+        <p class="notif-desc">O EPI "Capacete" vence em 3 dias</p>
+    </div>
+</div>
+    
+<div class="notif-item">
+    <span class="notif-icone">📋</span>
+    <div>
+        <p class="notif-titulo">Nova retirada registrada</p>
+        <p class="notif-desc">Funcionário #1024 retirou luvas</p>
+    </div>
+</div>
+    
+<div class="notif-item">
+    <span class="notif-icone">✅</span>
+    <div>
+        <p class="notif-titulo">Devolução concluída</p>
+        <p class="notif-desc">EPIs do funcionário #1020 devolvidos</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <div class="cards-container">
     <div class="card">
@@ -146,6 +252,19 @@
         // Exibe a data atual automaticamente
         document.getElementById("data").textContent =
             new Date().toLocaleDateString("pt-BR");
+
+// FUNÇÃO: abre e fecha o painel 
+    function toggleNotificacoes() {
+            var painel = document.getElementById("painel-notif");
+            var badge = document.getElementById("badge");
+
+            if (painel.style.display === "none" || painel.style.display === "") {
+                painel.style.display = "block";
+                badge.style.display = "none";   // some o vermelho ao abrir
+            } else {
+                painel.style.display = "none";
+            }
+        }
     </script>
 
 </body>
