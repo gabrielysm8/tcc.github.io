@@ -174,49 +174,46 @@
 <body>
 
 <div class="header-row">
-    </div>
+    <div>
         <h1>Sistema de Gestão de EPIs ☁️</h1>
         <p>Esta página foi hospedada com <strong>GitHub Pages</strong> — um serviço de nuvem gratuito.</p>
-</div>
-
-<button class="notif-btn"> 
+    </div>
+    <button class="notif-btn" onclick="toggleNotificacoes()">
         🔔 Notificações
-        <span class="notif-badge">3</span>
+        <span class="notif-badge" id="badge">3</span>
     </button>
 </div>
 
 <!-- Painel de notificações -->
-<div class="painel-header">
-    <h3>Notificações</h3>
-    <button class="btn-fechar" onclick="toggleNotificacoes()">✕</button>
-</div>
-    
-<div class="notif-lista">
-    <div class="notif-item notif-alerta">
-        <span class="notif-icone">⚠️</span>
-    <div>
-        <p class="notif-titulo">CI próximo do vencimento</p>
-        <p class="notif-desc">O EPI "Capacete" vence em 3 dias</p>
+<div class="painel-notif" id="painel-notif">
+    <div class="painel-header">
+        <h3>Notificações</h3>
+        <button class="btn-fechar" onclick="toggleNotificacoes()">✕</button>
     </div>
-</div>
-    
-<div class="notif-item">
-    <span class="notif-icone">📋</span>
-    <div>
-        <p class="notif-titulo">Nova retirada registrada</p>
-        <p class="notif-desc">Funcionário #1024 retirou luvas</p>
-    </div>
-</div>
-    
-<div class="notif-item">
-    <span class="notif-icone">✅</span>
-    <div>
-        <p class="notif-titulo">Devolução concluída</p>
-        <p class="notif-desc">EPIs do funcionário #1020 devolvidos</p>
-                </div>
+    <div class="notif-lista">
+        <div class="notif-item notif-alerta">
+            <span class="notif-icone">⚠️</span>
+            <div>
+                <p class="notif-titulo">CI próximo do vencimento</p>
+                <p class="notif-desc">O EPI "Capacete" vence em 3 dias</p>
+            </div>
+        </div>
+        <div class="notif-item">
+            <span class="notif-icone">📋</span>
+            <div>
+                <p class="notif-titulo">Nova retirada registrada</p>
+                <p class="notif-desc">Funcionário #1024 retirou luvas</p>
+            </div>
+        </div>
+        <div class="notif-item">
+            <span class="notif-icone">✅</span>
+            <div>
+                <p class="notif-titulo">Devolução concluída</p>
+                <p class="notif-desc">EPIs do funcionário #1020 devolvidos</p>
             </div>
         </div>
     </div>
+</div>
 
 <div class="cards-container">
     <div class="card">
@@ -256,8 +253,8 @@
         document.getElementById("data").textContent =
             new Date().toLocaleDateString("pt-BR");
 
-// FUNÇÃO: abre e fecha o painel 
-    function toggleNotificacoes() {
+        // FUNÇÃO: abre e fecha o painel 
+        function toggleNotificacoes() {
             var painel = document.getElementById("painel-notif");
             var badge = document.getElementById("badge");
 
