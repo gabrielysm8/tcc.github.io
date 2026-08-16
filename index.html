@@ -169,6 +169,108 @@
         .notif-alerta .notif-titulo {
             color: #e94560;
         }
+/* Cards que viram botões */   
+        .card-btn {
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .card-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+            border: 1px solid #e94560;
+        }
+        .card-btn:active {
+            transform: translateY(0);
+        }
+/* Não entendi oq isso faz */
+        .card-btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.3);
+        }
+/* telas internas (escondidas) */
+        .tela {
+            display: none;              /* ← ESSENCIAL: todas começam escondidas */
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.2s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+/* Cabeçalho da tela interna */
+        .tela-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .tela-header h2 {
+            margin: 0;
+            color: #0f3460;
+        }
+/* Botão voltar */
+        .btn-voltar {
+            background: #f5f7fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            color: #1a1a2e;
+            transition: background 0.15s;
+        }
+        .btn-voltar:hover {
+            background: #e5e7eb;
+        }
+/* Conteúdo da tela */
+        .tela-conteudo p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+/* Inputs dentro das telas */
+        .input-pesquisa {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+        }
+/* Botão de ação dentro das telas */
+        .btn-acao {
+            background: #e94560;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .btn-acao:hover {
+            background: #d13a52;
+        }
+/* Lista de EPIs */
+        .lista-epi {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .lista-epi li {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            background: #fafbfc;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
     </style>
 </head>
 <body>
@@ -215,14 +317,16 @@
     </div>
 </div>
 
+<div id="tela-inicial">
+    
 <div class="cards-container">
-    <div class="card">
+    <div class="card card-btn" onclick="mostrarTela('consulta')" tabindex="0" role="button">
         <span class="badge">🔎︎</span>
         <h2>Consulta de EPIs</h2>
         <p>Pesquisar, filtrar e visualizar especificações do estoque.</p>
     </div>
 
-    <div class="card">
+    <div class="card card-btn" onclick="mostrarTela('retirada')" tabindex="0" role="button">
         <span class="badge">→</span>
         <h2>Retirada de EPI</h2>
         <p>Entregar crachá, ler ficha e vincular EPIs ao funcionário.</p>
@@ -230,16 +334,77 @@
 </div>
 
 <div class="cards-container">
-    <div class="card">
+    <div class="card card-btn" onclick="mostrarTela('devolucao')" tabindex="0" role="button">
         <span class="badge">←</span>
         <h2>Devolução de EPI</h2>
         <p>Receber crachá, escanear itens e registrar devolução.</p>
     </div>
 
-    <div class="card">
+    <div class="card card-btn" onclick="mostrarTela('cadastro')" tabindex="0" role="button">
         <span class="badge">+</span>
         <h2>Registrar Novo EPI</h2>
         <p>Cadastrar novos equipamentos e adicionar ao estoque.</p>
+    </div>
+</div>
+
+</div>
+
+<!-- telas internas (escondidas) -->
+
+<!-- tela: Consulta de EPIs -->
+<div class="tela" id="tela-consulta">
+    <div class="tela-header">
+        <button class="btn-voltar" onclick="voltar()">← Voltar</button>
+        <h2>Consulta de EPIs</h2>
+    </div>
+    
+    <div class="tela-conteudo">
+        <p>Aqui você pode pesquisar e filtrar o estoque de EPIs.</p>
+        <input type="text" placeholder="Pesquisar EPI..." class="input-pesquisa">
+        <ul class="lista-epi">
+            <li>Capacete de segurança — 45 unidades</li>
+            <li>Luvas isolantes — 120 unidades</li>
+            <li>Óculos de proteção — 80 unidades</li>
+        </ul>
+    </div>
+</div>
+
+<!-- tela: Retirada de EPIs -->
+<div class="tela" id="tela-retirada">
+    <div class="tela-header">
+        <button class="btn-voltar" onclick="voltar()">← Voltar</button>
+        <h2>Retirada de EPI</h2>
+    </div>
+    
+    <div class="tela-conteudo">
+        <p>Entregue o crachá do funcionário para iniciar a retirada.</p>
+        <button class="btn-acao">Ler crachá</button>
+    </div>
+</div>
+
+<!-- tela: Devolução de EPI -->
+<div class="tela" id="tela-devolucao">
+    <div class="tela-header">
+        <button class="btn-voltar" onclick="voltar()">← Voltar</button>
+        <h2>Devolução de EPI</h2>
+    </div>
+    <div class="tela-conteudo">
+        <p>Escaneie os EPIs devolvidos pelo funcionário.</p>
+        <button class="btn-acao">Escanear EPIs</button>
+    </div>
+</div>
+
+<!-- tela: Registrar Novo EPI -->
+<div class="tela" id="tela-cadastro">
+    <div class="tela-header">
+        <button class="btn-voltar" onclick="voltar()">← Voltar</button>
+        <h2>Registrar Novo EPI</h2>
+    </div>
+    <div class="tela-conteudo">
+        <p>Preencha os dados do novo equipamento.</p>
+        <input type="text" placeholder="Nome do EPI" class="input-pesquisa">
+        <input type="number" placeholder="Quantidade" class="input-pesquisa">
+        <button class="btn-acao">Salvar no estoque</button>
     </div>
 </div>
 
@@ -265,6 +430,29 @@
                 painel.style.display = "none";
             }
         }
+
+        //  FUNÇÃO: mostra uma tela e esconde a inicial
+        function mostrarTela(nome) { // Esconde a tela inicial
+        document.getElementById("tela-inicial").style.display = "none";
+
+            // Esconde todas as telas internas (garantia)
+        document.getElementById("tela-consulta").style.display = "none";
+        document.getElementById("tela-retirada").style.display = "none";
+        document.getElementById("tela-devolucao").style.display = "none";
+        document.getElementById("tela-cadastro").style.display = "none";
+            // Mostra apenas a tela clicada
+        document.getElementById("tela-" + nome).style.display = "block";
+    }
+        //  FUNÇÃO: volta para a tela inicial
+       function voltar() {
+            // Esconde todas as telas internas
+        document.getElementById("tela-consulta").style.display = "none";
+        document.getElementById("tela-retirada").style.display = "none";
+        document.getElementById("tela-devolucao").style.display = "none";
+        document.getElementById("tela-cadastro").style.display = "none";
+            // Mostra a tela inicial
+        document.getElementById("tela-inicial").style.display = "block";
+    } 
     </script>
 
 </body>
