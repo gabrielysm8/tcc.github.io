@@ -320,7 +320,8 @@
 <div id="tela-inicial">
     
 <div class="cards-container">
-    <div class="card card-btn" onclick="mostrarTela('consulta')" tabindex="0" role="button">
+    <div class="card card-btn" onclick="location.hash='consulta'" tabindex="0" role="button">
+    <!-- Faz o endereço virar seusite.github.io/#consulta sem recarregar a página. -->
         <span class="badge">🔎︎</span>
         <h2>Consulta de EPIs</h2>
         <p>Pesquisar, filtrar e visualizar especificações do estoque.</p>
@@ -354,7 +355,8 @@
 <!-- tela: Consulta de EPIs -->
 <div class="tela" id="tela-consulta">
     <div class="tela-header">
-        <button class="btn-voltar" onclick="voltar()">← Voltar</button>
+        <button class="btn-voltar" onclick="history.back()">← Voltar</button>
+        <!-- faz o navegador voltar no histórico — equivalente ao botão voltar do navegador -->
         <h2>Consulta de EPIs</h2>
     </div>
     
@@ -453,6 +455,21 @@
             // Mostra a tela inicial
         document.getElementById("tela-inicial").style.display = "block";
     } 
+        //  HASH: controla a tela de consulta pela URL
+
+           // Quando o hash muda (clique no card ou botão voltar do navegador)
+        window.addEventListener('hashchange', function() {
+           if (location.hash === '#consulta') {
+              mostrarTela('consulta');   // mostra a tela
+           } else {
+        voltar();                   // hash vazio → volta para inicial
+    }
+});
+
+            // Se alguém entrar no site já com #consulta na URL (favorito, refresh)
+            if (location.hash === '#consulta') {
+              mostrarTela('consulta');
+    }
     </script>
 
 </body>
