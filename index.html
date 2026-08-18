@@ -470,6 +470,51 @@
             if (location.hash === '#consulta') {
               mostrarTela('consulta');
     }
+        //  HASH: controla a tela de retirada pela URL
+
+           // Quando o hash muda (clique no card ou botão voltar do navegador)
+        window.addEventListener('hashchange', function() {
+           if (location.hash === '#retirada') {
+              mostrarTela('retirada');   // mostra a tela
+           } else {
+        voltar();                   // hash vazio → volta para inicial
+    }
+});
+
+            // Se alguém entrar no site já com #retirada na URL (favorito, refresh)
+            if (location.hash === '#retirada') {
+              mostrarTela('retirada');
+    }
+        //  HASH: controla a tela de devolução pela URL
+
+          // Quando o hash muda (clique no card ou botão voltar do navegador)
+        window.addEventListener('hashchange', function() {
+           if (location.hash === '#devolucao') {
+              mostrarTela('devolucao');   // mostra a tela
+           } else {
+        voltar();                   // hash vazio → volta para inicial
+    }
+});
+
+           // Se alguém entrar no site já com #devolução na URL (favorito, refresh)
+           if (location.hash === '#devolucao') {
+              mostrarTela('devolucao');
+    }
+        //  HASH: controla a tela de cadastro pela URL
+
+           // Quando o hash muda (clique no card ou botão voltar do navegador)
+        window.addEventListener('hashchange', function() {
+           if (location.hash === '#cadastro') {
+              mostrarTela('cadastro');   // mostra a tela
+           } else {
+        voltar();                   // hash vazio → volta para inicial
+    }
+});
+
+            // Se alguém entrar no site já com #cadastro na URL (favorito, refresh)
+            if (location.hash === '#cadastro') {
+              mostrarTela('cadastro');
+    }
     </script>
 
 </body>
