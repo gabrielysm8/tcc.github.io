@@ -335,13 +335,13 @@
 </div>
 
 <div class="cards-container">
-    <div class="card card-btn" onclick="location.hash='devolução'" tabindex="0" role="button">
+    <div class="card card-btn" onclick="location.hash='devolucao'" tabindex="0" role="button">
         <span class="badge">←</span>
         <h2>Devolução de EPI</h2>
         <p>Receber crachá, escanear itens e registrar devolução.</p>
     </div>
 
-    <div class="card card-btn" onclick="location.hash='registro'" tabindex="0" role="button">
+    <div class="card card-btn" onclick="location.hash='cadastro'" tabindex="0" role="button">
         <span class="badge">+</span>
         <h2>Registrar Novo EPI</h2>
         <p>Cadastrar novos equipamentos e adicionar ao estoque.</p>
@@ -415,107 +415,77 @@
         <p>Data: <span id="data"></span></p>
     </footer>
 
-    <script>
-        // Exibe a data atual automaticamente
-        document.getElementById("data").textContent =
-            new Date().toLocaleDateString("pt-BR");
+<script>
+    // Exibe a data atual automaticamente
+    document.getElementById("data").textContent =
+        new Date().toLocaleDateString("pt-BR");
 
-        // FUNÇÃO: abre e fecha o painel 
-        function toggleNotificacoes() {
-            var painel = document.getElementById("painel-notif");
-            var badge = document.getElementById("badge");
+    // FUNÇÃO: abre e fecha o painel 
+    function toggleNotificacoes() {
+        var painel = document.getElementById("painel-notif");
+        var badge = document.getElementById("badge");
 
-            if (painel.style.display === "none" || painel.style.display === "") {
-                painel.style.display = "block";
-                badge.style.display = "none";   // some o vermelho ao abrir
-            } else {
-                painel.style.display = "none";
-            }
+        if (painel.style.display === "none" || painel.style.display === "") {
+            painel.style.display = "block";
+            badge.style.display = "none";
+        } else {
+            painel.style.display = "none";
         }
+    }
 
-        //  FUNÇÃO: mostra uma tela e esconde a inicial
-        function mostrarTela(nome) { // Esconde a tela inicial
+    // FUNÇÃO: mostra uma tela específica e esconde as outras
+    function mostrarTela(nome) {
+        // Esconde a tela inicial
         document.getElementById("tela-inicial").style.display = "none";
 
-            // Esconde todas as telas internas (garantia)
+        // Esconde todas as telas internas
         document.getElementById("tela-consulta").style.display = "none";
         document.getElementById("tela-retirada").style.display = "none";
         document.getElementById("tela-devolucao").style.display = "none";
         document.getElementById("tela-cadastro").style.display = "none";
-            // Mostra apenas a tela clicada
-        document.getElementById("tela-" + nome).style.display = "block";
+
+        // Mostra apenas a tela pedida (se existir)
+        var tela = document.getElementById("tela-" + nome);
+        if (tela) {
+            tela.style.display = "block";
+        }
     }
-        //  FUNÇÃO: volta para a tela inicial
-       function voltar() {
-            // Esconde todas as telas internas
+
+    // FUNÇÃO: volta para a tela inicial
+    function voltar() {
         document.getElementById("tela-consulta").style.display = "none";
         document.getElementById("tela-retirada").style.display = "none";
         document.getElementById("tela-devolucao").style.display = "none";
         document.getElementById("tela-cadastro").style.display = "none";
-            // Mostra a tela inicial
+
         document.getElementById("tela-inicial").style.display = "block";
-    } 
-        //  HASH: controla a tela de consulta pela URL
-
-           // Quando o hash muda (clique no card ou botão voltar do navegador)
-        window.addEventListener('hashchange', function() {
-           if (location.hash === '#consulta') {
-              mostrarTela('consulta');   // mostra a tela
-           } else {
-        voltar();                   // hash vazio → volta para inicial
     }
-});
 
-            // Se alguém entrar no site já com #consulta na URL (favorito, refresh)
-            if (location.hash === '#consulta') {
-              mostrarTela('consulta');
-    }
-        //  HASH: controla a tela de retirada pela URL
+    // ═══════════════════════════════════════════
+    //  ÚNICO listener de hash — lê o hash e decide
+    // ═══════════════════════════════════════════
+    window.addEventListener('hashchange', function() {
+        var hash = location.hash;  // ex: "#consulta"
 
-           // Quando o hash muda (clique no card ou botão voltar do navegador)
-        window.addEventListener('hashchange', function() {
-           if (location.hash === '#retirada') {
-              mostrarTela('retirada');   // mostra a tela
-           } else {
-        voltar();                   // hash vazio → volta para inicial
-    }
-});
+        if (hash === '#consulta') {
+            mostrarTela('consulta');
+        } else if (hash === '#retirada') {
+            mostrarTela('retirada');
+        } else if (hash === '#devolucao') {
+            mostrarTela('devolucao');
+        } else if (hash === '#cadastro') {
+            mostrarTela('cadastro');
+        } else {
+            voltar();  // hash vazio ou desconhecido → volta para inicial
+        }
+    });
 
-            // Se alguém entrar no site já com #retirada na URL (favorito, refresh)
-            if (location.hash === '#retirada') {
-              mostrarTela('retirada');
-    }
-        //  HASH: controla a tela de devolução pela URL
-
-          // Quando o hash muda (clique no card ou botão voltar do navegador)
-        window.addEventListener('hashchange', function() {
-           if (location.hash === '#devolucao') {
-              mostrarTela('devolucao');   // mostra a tela
-           } else {
-        voltar();                   // hash vazio → volta para inicial
-    }
-});
-
-           // Se alguém entrar no site já com #devolução na URL (favorito, refresh)
-           if (location.hash === '#devolucao') {
-              mostrarTela('devolucao');
-    }
-        //  HASH: controla a tela de cadastro pela URL
-
-           // Quando o hash muda (clique no card ou botão voltar do navegador)
-        window.addEventListener('hashchange', function() {
-           if (location.hash === '#cadastro') {
-              mostrarTela('cadastro');   // mostra a tela
-           } else {
-        voltar();                   // hash vazio → volta para inicial
-    }
-});
-
-            // Se alguém entrar no site já com #cadastro na URL (favorito, refresh)
-            if (location.hash === '#cadastro') {
-              mostrarTela('cadastro');
-    }
-    </script>
+    // Se entrar no site já com hash na URL (refresh ou favorito)
+    if (location.hash === '#consulta') mostrarTela('consulta');
+    if (location.hash === '#retirada') mostrarTela('retirada');
+    if (location.hash === '#devolucao') mostrarTela('devolucao');
+    if (location.hash === '#cadastro') mostrarTela('cadastro');
+</script>
 
 </body>
 </html>
