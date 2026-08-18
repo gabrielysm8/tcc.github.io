@@ -327,7 +327,7 @@
         <p>Pesquisar, filtrar e visualizar especificações do estoque.</p>
     </div>
 
-    <div class="card card-btn" onclick="mostrarTela('retirada')" tabindex="0" role="button">
+    <div class="card card-btn" onclick="location.hash='retirada'" tabindex="0" role="button">
         <span class="badge">→</span>
         <h2>Retirada de EPI</h2>
         <p>Entregar crachá, ler ficha e vincular EPIs ao funcionário.</p>
@@ -335,13 +335,13 @@
 </div>
 
 <div class="cards-container">
-    <div class="card card-btn" onclick="mostrarTela('devolucao')" tabindex="0" role="button">
+    <div class="card card-btn" onclick="location.hash='devolução'" tabindex="0" role="button">
         <span class="badge">←</span>
         <h2>Devolução de EPI</h2>
         <p>Receber crachá, escanear itens e registrar devolução.</p>
     </div>
 
-    <div class="card card-btn" onclick="mostrarTela('cadastro')" tabindex="0" role="button">
+    <div class="card card-btn" onclick="location.hash='registro'" tabindex="0" role="button">
         <span class="badge">+</span>
         <h2>Registrar Novo EPI</h2>
         <p>Cadastrar novos equipamentos e adicionar ao estoque.</p>
@@ -374,7 +374,7 @@
 <!-- tela: Retirada de EPIs -->
 <div class="tela" id="tela-retirada">
     <div class="tela-header">
-        <button class="btn-voltar" onclick="voltar()">← Voltar</button>
+        <button class="btn-voltar" onclick="history.back()">← Voltar</button>
         <h2>Retirada de EPI</h2>
     </div>
     
@@ -387,7 +387,7 @@
 <!-- tela: Devolução de EPI -->
 <div class="tela" id="tela-devolucao">
     <div class="tela-header">
-        <button class="btn-voltar" onclick="voltar()">← Voltar</button>
+        <button class="btn-voltar" onclick="history.back()">← Voltar</button>
         <h2>Devolução de EPI</h2>
     </div>
     <div class="tela-conteudo">
@@ -399,7 +399,7 @@
 <!-- tela: Registrar Novo EPI -->
 <div class="tela" id="tela-cadastro">
     <div class="tela-header">
-        <button class="btn-voltar" onclick="voltar()">← Voltar</button>
+        <button class="btn-voltar" onclick="history.back()">← Voltar</button>
         <h2>Registrar Novo EPI</h2>
     </div>
     <div class="tela-conteudo">
